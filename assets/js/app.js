@@ -7,7 +7,6 @@ $(document).ready(()=>{
     $("#input-form").submit(function(e){        
         return false;
     });
-
 })
 
 function geraMensagem(nome, mensagem, tipo){
