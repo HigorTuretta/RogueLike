@@ -1,6 +1,7 @@
 let gameArea = $('#game-area');
 let playerMessageInput = $('#input-action');
 let backpack = $('#backpack');
+let mainMenuAudio = $('#audioPlayer');
 
 $(document).ready(()=>{   
     
@@ -8,6 +9,7 @@ $(document).ready(()=>{
         return false;
     });
 
+    mainMenuAudio.play();
 })
 
 function geraMensagem(nome, mensagem, tipo){

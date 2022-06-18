@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <link rel="shortcut icon" href="assets/images/Itens/45.png" type="image/x-icon">
+    <title>Rogue Like</title>
+</head>
+
+<body>
+    <section id="backpack" class="backpack start-hidden">
+        <div class="close-btn-div">
+            <button onclick="closeBackpack()" class="close-btn"><img src="assets/images/close.png"></button>
+        </div>
+        <div class="backpack-slot">
+            <div class="backpack-item">
+                <img src="assets/images/Itens/22.png">
+            </div>
+        </div>
+        <div class="backpack-slot">
+            <div class="backpack-item">
+                <img src="assets/images/Itens/11.png">
+            </div>
+        </div>
+        <div class="backpack-slot">
+            <div class="backpack-item"></div>
+        </div>
+        <div class="backpack-slot">
+            <div class="backpack-item"></div>
+        </div>
+        <div class="backpack-slot">
+            <div class="backpack-item"></div>
+        </div>
+        <div class="backpack-slot">
+            <div class="backpack-item"></div>
+        </div>
+        <div class="backpack-slot">
+            <div class="backpack-item"></div>
+        </div>
+        <div class="backpack-slot">
+            <div class="backpack-item"></div>
+        </div>
+        <div class="backpack-slot">
+            <div class="backpack-item"></div>
+        </div>
+    </section>
+
+    <section class="game">
+        <section class="game-area" id="game-area">
+            <div class="game-message">
+                <label class="message-title">Turetta:</label>
+                <p class="message normal-message">Exemplo de Texto que irá aparecer!</p>
+            </div>           
+        </section>              
+    </section>
+    <section class="options-area">
+            <button onclick="openBackpack()" class="backpack-button">
+                <img src="assets/images/backpack-Icon.png" alt="Abrir a Mochila">      
+                <span>Mochila</span>         
+            </button>
+    </section> 
+    <section class="game-input">
+        <div class="input">
+            <form id="input-form" class="input-form" autocomplete="false">
+                <input  type="text" autofocus placeholder="Você Faz..." id="input-action" class="input-action" name="action-input">
+                <button class="input-button" submit onclick="geraMensagem('Player', playerMessage(), 'normal-message')"></button>
+            </form>
+        </div>  
+    </section>
+
+</body>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/app.js"></script>
+</html>
