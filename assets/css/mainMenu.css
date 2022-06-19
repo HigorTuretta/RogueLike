@@ -104,7 +104,25 @@ background-color: darkgrey;
     color: white;
 }
 
+.play-button{
+    padding: 10px 50px;
+    text-decoration: none;
+    color: white;
+    background-color: rgb(117, 180, 21);
+    border-radius: 5px;
+    border: 2px solid green;
+    box-shadow:3px 3px 0px green;
+    transition: all 0.3s ease-in-out;
+    font-family: '8bitfont';
+    font-size: .6rem;
+}
 
+.play-button:hover{
+    cursor: pointer;
+    box-shadow: none;
+    background-color: green;
+    color: white;
+}
 
 @media screen and (max-width: 700px) {
 
