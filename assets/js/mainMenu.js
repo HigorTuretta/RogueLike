@@ -1,4 +1,4 @@
-let mainMenuAudio = $('#audioPlayer')[0];
+let popupMusic = $('#music-confirm');
 
 $(document).ready(()=>{   
     
@@ -6,6 +6,18 @@ $(document).ready(()=>{
         return false;
     });
 
-    const audio = new Audio('assets/Sounds/mainMenu_sound.mp3');
-    audio.play();
+
 })
+
+function playMenuMusic(conf){
+
+    if (conf == true){
+        const audio = new Audio('assets/Sounds/mainMenu_sound.mp3');
+        audio.play();
+        popupMusic.addClass('fade-out-bck')
+
+    }else{
+        popupMusic.addClass('fade-out-bck')
+    }
+
+}

@@ -6,12 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/mainMenu.css">
     
     <link rel="shortcut icon" href="assets/images/Itens/45.png" type="image/x-icon">
     <title>Rogue Like</title>
 </head>
 <body>
+
+    <section id="music-confirm" class="music-confirm">
+        <div class="yes-no-pop-up">
+            <img src="assets/images/sound.png" alt="">
+            <p>Você deseja ativar a música?</p>
+            <div class="button-area">
+                <button id="yes-button" onclick="playMenuMusic(true)">Sim</button>
+                <button id="no-button" onclick="playMenuMusic(false)">Não</button>
+            </div>
+        </div>
+    </section>
+    
     <section class="main-menu">
         <img class="scale-in-hor-center" src="assets/images/TRUE.png" alt="" srcset="">        
     </section>
