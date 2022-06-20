@@ -68,6 +68,7 @@ p::first-letter{
     font-weight: bold;
     letter-spacing: 1px;
 }
+
 .danger-message{
     font-family: 'Roboto Mono', monospace;
     color: rgb(203, 203, 203); ;
@@ -209,6 +210,9 @@ p::first-letter{
 .input-pop-up p{
     margin:  20px 0;
 }
+.input-pop-up span{
+    color: red;
+}
 
 .input-pop-up input{
     background-color: transparent;
@@ -218,9 +222,12 @@ p::first-letter{
     text-align: center;
     border-bottom: 2px solid rgb(51, 56, 6);
 }
+
 .popup-button-area button{
     padding: 10px 30px;
 }
+
+
 
 #confirm-button{
     background-color: rgb(117, 180, 21);

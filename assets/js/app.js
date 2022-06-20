@@ -8,7 +8,7 @@ let npcColor = '#1ba112';
 let storeColor = '#dfe30b';
 let systemColor = '#ff00fb';
 let delay = 1000;
-
+let qtdMsg = 0;
 let playerName;
 
 $(document).ready(()=>{   
@@ -16,8 +16,6 @@ $(document).ready(()=>{
     $("#input-form").submit(function(e){        
         return false;
     });
-
-    playerName = 'Player';
 
     game();
 })
@@ -68,8 +66,16 @@ function closeBackpack(){
 }
 
 function setPlayerName(){
-    playerName = $('#text-input').val();
-    closePopUp('#text-input-pop-up');
+    if ($('#text-input').val().trim() == '' || $('#text-input').val() == null){       
+        if (qtdMsg == 0){
+            $('.input-pop-up').append('<span>Informe um nome para continuar!</span>')
+            qtdMsg = 1;
+        }       
+    }else{
+        playerName = $('#text-input').val(); 
+        closePopUp('#text-input-pop-up');
+        qtdMsg = 0;
+    }
 }
 
 function getPlayerName(){
@@ -102,6 +108,7 @@ function geraTextPopUp(descricao, funcao, atributos){
     popUpInput.setAttribute('type', 'text');
     popUpInput.setAttribute('name', 'text-input');
     popUpInput.setAttribute('autoComplete', 'none');
+    popUpInput.setAttribute('required', 'true');
     divInnerPopUp.setAttribute('class', 'input-pop-up');
     divButtonArea.setAttribute('class', 'popup-button-area');
     confirmButton.setAttribute('id', 'confirm-button');
