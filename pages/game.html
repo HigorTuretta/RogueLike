@@ -12,7 +12,7 @@
     <title>Rogue Like</title>
 </head>
 
-<body>
+<body id="body">
     <section id="backpack" class="backpack start-hidden">
         <div class="close-btn-div">
             <button onclick="closeBackpack()" class="close-btn"><img src="../assets/images/close.png"></button>
@@ -52,10 +52,7 @@
 
     <section class="game">
         <section class="game-area" id="game-area">
-            <div class="game-message">
-                <label class="message-title">Turetta:</label>
-                <p class="message normal-message">Exemplo de Texto que irá aparecer!</p>
-            </div>           
+                   
         </section>              
     </section>
     <section class="options-area">
@@ -68,10 +65,20 @@
         <div class="input">
             <form id="input-form" class="input-form" autocomplete="false">
                 <input  type="text" autofocus placeholder="Você Faz..." id="input-action" class="input-action" name="action-input">
-                <button class="input-button" submit onclick="geraMensagem('Player', playerMessage(), 'normal-message')"></button>
+                <button class="input-button" submit onclick="geraMensagem(playerName, '#0dcdd4', playerMessage(), 'normal-message')"></button>
             </form>
         </div>  
     </section>
+
+    <!-- <section id="text-input-pop-up" class="text-input-pop-up">
+        <div class="input-pop-up">
+            <p>Diga seu nome à voz desconhecida</p>
+            <input type="text" required name="text-input" id="text-input">
+            <div class="popup-button-area">
+                <button id="confirm-button" onclick="setPlayerName()">Confirmar</button>
+            </div>
+        </div>
+    </section> -->
 
 </body>
 <script src="../assets/js/jquery.min.js"></script>
