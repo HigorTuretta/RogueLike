@@ -24,7 +24,7 @@ $(document).ready(()=>{
 
 function geraMensagem(nome, color_name, mensagem, tipo){
 
-    if (mensagem == '' || mensagem == null ){
+    if (mensagem.trim() == '' || mensagem == null ){
         return false
     }
 
@@ -49,6 +49,7 @@ function geraMensagem(nome, color_name, mensagem, tipo){
 
 }
 
+//Retorna a mensagem digitada pelo jogador
 function playerMessage(){   
     let pMessage = playerMessageInput.val(); 
 
@@ -75,6 +76,7 @@ function getPlayerName(){
     return playerName;
 }
 
+//Fecha uma popup e a exclui do HTML depois de 5 segundos
 function closePopUp(id){
     let popUp = $(id);
     popUp.addClass('fade-out-bck');
@@ -85,7 +87,7 @@ function closePopUp(id){
 }
 
 function geraTextPopUp(descricao, funcao, atributos){
-
+    //Cria os elementos HTML
     let sectionPopUp = document.createElement('section');
     let divInnerPopUp = document.createElement('div');
     let message = document.createElement('p');
@@ -93,6 +95,7 @@ function geraTextPopUp(descricao, funcao, atributos){
     let divButtonArea = document.createElement('div');
     let confirmButton = document.createElement('button');
 
+    //Adiciona Classes e Atributos aos elementos criados
     sectionPopUp.setAttribute('class', 'text-input-pop-up');
     sectionPopUp.setAttribute('id', 'text-input-pop-up');
     popUpInput.setAttribute('id', 'text-input');
@@ -104,19 +107,19 @@ function geraTextPopUp(descricao, funcao, atributos){
     confirmButton.setAttribute('id', 'confirm-button');
     confirmButton.setAttribute('onclick', funcao + '(' + atributos +')');
 
+    //Adiciona a mensagem no botão e mensagem principal da popUp
     confirmButton.appendChild(document.createTextNode('Confirmar'));
     message.appendChild(document.createTextNode(descricao));
 
+    //Adiciona todos os elementos criados na página HTML
     divButtonArea.appendChild(confirmButton);
-
     divInnerPopUp.appendChild(message);
     divInnerPopUp.appendChild(popUpInput);
     divInnerPopUp.appendChild(divButtonArea);
-
     sectionPopUp.appendChild(divInnerPopUp);
-
     body.append(sectionPopUp);
 }
+
 
 // game begin
 
