@@ -2,21 +2,16 @@ let gameArea = $('#game-area');
 let playerMessageInput = $('#input-action');
 let backpack = $('#backpack');
 let body = $('#body');
-
-let unknowColor = '#e35a0b';
-let npcColor = '#1ba112';
-let storeColor = '#dfe30b';
-let systemColor = '#ff00fb';
+let dialogoAtual = 0;
 let delay = 1000;
 let qtdMsg = 0;
 let playerName;
 
 $(document).ready(()=>{   
-    
     $("#input-form").submit(function(e){        
         return false;
     });
-
+    dialogoAtual = localStorage.gameData;
     game();
 })
 
@@ -73,7 +68,11 @@ function setPlayerName(){
         }       
     }else{
         playerName = $('#text-input').val(); 
+        localStorage.playerName = playerName;
+        localStorage.gameData = 4;
+        dialogoAtual = localStorage.gameData;0
         closePopUp('#text-input-pop-up');
+        game();
         qtdMsg = 0;
     }
 }
@@ -136,9 +135,17 @@ function sleep(ms) {
   }
 
 function game(){
-    sleep(delay).then(() => {geraMensagem('Voz Desconhecida', unknowColor, 'Acorde, você precisa escapar!', 'warning-message')});
-    sleep(delay*1.5).then(() => {geraMensagem('Narrador', systemColor, 'Você acorda em uma cela de prisão velha e totalmente suja, sem saber por que está ali.', 'system-message')});
-    sleep(delay*3).then(() => {geraMensagem('Voz Desconhecida', unknowColor, 'Pode me dizer seu nome?', 'normal-message')});
-    sleep(delay*3.5).then(() => geraTextPopUp('Diga seu nome à voz desconhecida', 'setPlayerName', ''));
-    
+    if (dialogoAtual <= 3) {
+        sleep(delay).then(() => {geraMensagem(messages.gameMessages, unknowColor, 'Acorde, você precisa escapar!', 'warning-message')});
+        sleep(delay*1.5).then(() => {geraMensagem('Narrador', systemColor, 'Você acorda em uma cela de prisão velha e totalmente suja, sem saber por que está ali.', 'system-message')});
+        sleep(delay*3).then(() => {geraMensagem('Voz Desconhecida', unknowColor, 'Pode me dizer seu nome?', 'normal-message')});
+        sleep(delay*3.5).then(() => geraTextPopUp('Diga seu nome à voz desconhecida', 'setPlayerName', ''));
+    }else{
+        for (msg of messages.gameMessages){
+            if (dialogoAtual == msg.msgCode){
+                geraMensagem(msg.charName, msg.color, msg.message, msg.type)
+            }
+        } 
+    }
+
 }
