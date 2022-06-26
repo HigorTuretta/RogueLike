@@ -6,12 +6,13 @@ let dialogoAtual = 0;
 let delay = 1000;
 let qtdMsg = 0;
 let playerName;
+let messageReturn = 0;
 
 $(document).ready(()=>{   
     $("#input-form").submit(function(e){        
         return false;
     });
-    dialogoAtual = localStorage.gameData;
+    dialogoAtual = parseInt(localStorage.gameData);
     game();
 })
 
@@ -70,7 +71,7 @@ function setPlayerName(){
         playerName = $('#text-input').val(); 
         localStorage.playerName = playerName;
         localStorage.gameData = 4;
-        dialogoAtual = localStorage.gameData;0
+        dialogoAtual = localStorage.gameData;
         closePopUp('#text-input-pop-up');
         game();
         qtdMsg = 0;
@@ -78,7 +79,7 @@ function setPlayerName(){
 }
 
 function getPlayerName(){
-    return playerName;
+    return localStorage.playerName;
 }
 
 //Fecha uma popup e a exclui do HTML depois de 5 segundos
@@ -126,6 +127,31 @@ function geraTextPopUp(descricao, funcao, atributos){
     body.append(sectionPopUp);
 }
 
+function geraYesNoOptions(yesText, noText){
+    let sectionOptions = document.createElement('section');
+    let yesBtn = document.createElement('button');
+    let yesSpan = document.createElement('span');
+    let noBtn = document.createElement('button');
+    let noSpan = document.createElement('span');
+
+    sectionOptions.setAttribute('class', 'options-area bounce-in-bottom');
+    sectionOptions.setAttribute('id', 'options-area');
+    yesBtn.setAttribute('class', 'yes-btn');
+    yesBtn.setAttribute('onclick', 'yesAction()');
+    noBtn.setAttribute('class', 'no-btn');
+    noBtn.setAttribute('onclick', 'noAction()');
+    yesSpan.appendChild(document.createTextNode(yesText));
+    noSpan.appendChild(document.createTextNode(noText));
+
+    yesBtn.appendChild(yesSpan);
+    noBtn.appendChild(noSpan);
+
+    sectionOptions.appendChild(yesBtn);
+    sectionOptions.appendChild(noBtn);
+
+    body.append(sectionOptions);
+}
+
 
 // game begin
 
@@ -134,18 +160,57 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  //criar uma variavel de resposta esperada na mensagem
+
 function game(){
     if (dialogoAtual <= 3) {
-        sleep(delay).then(() => {geraMensagem(messages.gameMessages, unknowColor, 'Acorde, você precisa escapar!', 'warning-message')});
+        sleep(delay).then(() => {geraMensagem('Voz Desconhecida', unknowColor, 'Acorde, você precisa escapar!', 'warning-message')});
         sleep(delay*1.5).then(() => {geraMensagem('Narrador', systemColor, 'Você acorda em uma cela de prisão velha e totalmente suja, sem saber por que está ali.', 'system-message')});
         sleep(delay*3).then(() => {geraMensagem('Voz Desconhecida', unknowColor, 'Pode me dizer seu nome?', 'normal-message')});
         sleep(delay*3.5).then(() => geraTextPopUp('Diga seu nome à voz desconhecida', 'setPlayerName', ''));
     }else{
-        for (msg of messages.gameMessages){
-            if (dialogoAtual == msg.msgCode){
-                geraMensagem(msg.charName, msg.color, msg.message, msg.type)
-            }
-        } 
-    }
-
+       
+       $.each(messages.gameMessages, function(i, msg){     
+            setTimeout(() => {
+                if (dialogoAtual == msg.msgCode){ 
+                    if(msg.retorna == 100){
+                        geraMensagem(msg.charName, msg.color, msg.message, msg.type)
+                        geraYesNoOptions(msg.caseTrue, msg.caseFalse)
+                        console.log(dialogoAtual)
+                    }else{
+                        geraMensagem(msg.charName, msg.color, msg.message, msg.type)
+                        dialogoAtual ++;  
+                    }        
+                    }
+            }, i * 500)                 
+            });
+    } 
 }
+
+function yesAction(){
+    dialogoAtual++
+    localStorage.gameData = dialogoAtual;
+    game();
+}
+function noAction(){
+    
+}
+
+
+async function handleForm() {
+  let userInput = '';
+  console.log('Before getting the user input: ', userInput);
+  userInput = await getUserInput();
+  console.log('After getting user input: ', userInput);
+};
+
+function getUserInput() {
+  return new Promise((resolve, reject) => {
+    $('#myInput').keydown(function(e) {
+      if (e.keyCode == 13) {
+        const inputVal = $(this).val();
+        resolve(inputVal);
+      }
+    });
+  });
+};
