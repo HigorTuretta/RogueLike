@@ -12,7 +12,11 @@ $(document).ready(()=>{
     $("#input-form").submit(function(e){        
         return false;
     });
-    dialogoAtual = parseInt(localStorage.gameData);
+    if(localStorage.getItem("gameData") === null){
+        dialogoAtual = 0 
+    }else{
+        dialogoAtual = parseInt(localStorage.gameData);
+    }
     game();
 })
 
@@ -71,15 +75,16 @@ function setPlayerName(){
         playerName = $('#text-input').val(); 
         localStorage.playerName = playerName;
         localStorage.gameData = 4;
-        dialogoAtual = localStorage.gameData;
+        dialogoAtual = parseInt(localStorage.gameData);
         closePopUp('#text-input-pop-up');
+        location.reload(true);
         game();
         qtdMsg = 0;
     }
 }
 
 function getPlayerName(){
-    return localStorage.playerName;
+    return localStorage.playerName
 }
 
 //Fecha uma popup e a exclui do HTML depois de 5 segundos
